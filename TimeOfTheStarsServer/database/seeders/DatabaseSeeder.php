@@ -14,11 +14,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            TournamentSeeder::class,
-            ExperienceLevelSeeder::class,
-            TeamSeeder::class,
-            PlayerSeeder::class,
-            GameMatchSeeder::class,
+            Userseeder::class,
+//            TournamentSeeder::class,
+//            ExperienceLevelSeeder::class,
+//            TeamSeeder::class,
+//            PlayerSeeder::class,
+//            GameMatchSeeder::class,
         ]);
     }
 }

@@ -9,14 +9,15 @@ class Game extends Model
 {
     protected $fillable = ['team_a_id', 'team_b_id', 'date', 'time', 'location', 'score'];
 
-    public function tournaments(): BelongsToMany
+    public function tournaments()
     {
-        return $this->belongsToMany(Tournament::class);
+        return $this->belongsToMany(Tournament::class, 'tournament_game');
     }
+
 
     public function championships(): BelongsToMany
     {
-        return $this->belongsToMany(Championship::class);
+        return $this->belongsToMany(Championship::class, 'championship_game');
     }
 
     public function teamA()
