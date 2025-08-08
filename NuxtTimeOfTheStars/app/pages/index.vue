@@ -775,20 +775,23 @@
 <script setup>
 import { ref } from 'vue'
 import MapInfo from '@/components/MapInfo.vue'
+import { getTeamLogo } from '@/utils/PicturesAdmin.ts'
 
-const data = await useFetch('http://127.0.0.1:8000/api/players')
-console.log(data)
-if (data) {
-    console.log(
-        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-    )
-}
+const { teamsdata, getTeamById } = await useTeams()
+
+const myTeam = await getTeamById(1)
+console.log(myTeam)
+console.log(myTeam.name)
+
+const teamId = 2
+const logoUrl = getTeamLogo(teamId)
+
 // Данные для прямых трансляций
 const liveMatches = ref([
     {
         team1: 'Локомотив',
         team2: 'Зубр',
-        logo1: '/photo.png',
+        logo1: logoUrl,
         logo2: '/photo_53844715688281.png (1).webp',
         score: '2:1',
         time: '18:30',
@@ -836,7 +839,7 @@ const upcomingMatches = ref([
         time: '20:00',
     },
     {
-        id: 1,
+        id: 4,
         tournament: 'Товарищеский',
         team1: 'Торпедо',
         team2: 'Локомотив',
@@ -850,11 +853,11 @@ const upcomingMatches = ref([
 // Данные для лучших игроков
 const topPlayers = ref([
     {
-        name: 'Александр Петров',
-        team: 'ХК "Локомотив"',
-        logo: '/logo1.png',
-        goals: 12,
-        assists: 8,
+        // name: player.full_name,
+        // team: player.team_id.full_name,
+        // logo: '/logo1.png',
+        // goals: player.goals,
+        // assists: player.assists,
     },
     {
         name: 'Дмитрий Сидоров',
