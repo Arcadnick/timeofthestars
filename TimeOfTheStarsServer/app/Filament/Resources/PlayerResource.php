@@ -38,6 +38,7 @@ class PlayerResource extends Resource
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table->columns([
+            Tables\Columns\TextColumn::make('id')->label('ID')->sortable(),
             Tables\Columns\TextColumn::make('full_name')->searchable()->label('ФИО'),
             Tables\Columns\TextColumn::make('team.name')->label('Команда'),
             Tables\Columns\TextColumn::make('goals')->label('Голы'),
