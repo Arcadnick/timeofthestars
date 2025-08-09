@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gray-900 text-white">
+    <div class="min-h-screen bg-gray-900 text-white overflow-x-hidden">
         <Header />
 
         <!-- Hero Section -->
@@ -21,9 +21,13 @@
                     </div>
 
                     <div
-                        class="flex justify-center w-120 h-80 relative mx-auto mb-6"
+                        class="flex justify-center w-full md:w-[600px] h-80 relative mx-auto mb-6"
                     >
-                        <img class="" src="/______.png.webp" alt="" />
+                        <img
+                            class="w-full h-full object-contain"
+                            src="/______.png.webp"
+                            alt=""
+                        />
                     </div>
 
                     <p
@@ -100,13 +104,14 @@
                     </router-link>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-3">
                     <div
                         v-for="(match, index) in liveMatches"
                         :key="index"
-                        class="bg-gray-800 rounded-xl p-6 border-l-4 border-red-500"
+                        class="bg-gray-800 rounded-lg p-3 border-l-4 border-red-500"
                     >
-                        <div class="flex items-center justify-between mb-4">
+                        <!-- Заголовок с LIVE и временем -->
+                        <div class="flex items-center justify-between mb-2">
                             <div class="flex items-center gap-2">
                                 <div
                                     class="w-2 h-2 bg-red-500 rounded-full animate-pulse"
@@ -115,34 +120,44 @@
                                     >LIVE</span
                                 >
                             </div>
-                            <span class="text-gray-400 text-sm">{{
-                                match.time
-                            }}</span>
+                            <span
+                                class="text-gray-400 text-xs bg-gray-700 px-2 py-1 rounded"
+                            >
+                                {{ match.time }}
+                            </span>
                         </div>
 
+                        <!-- Команды и счет -->
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 relative">
+                            <!-- Команда 1 -->
+                            <div class="flex items-center gap-2 flex-1 min-w-0">
+                                <div class="w-8 h-8 flex-shrink-0">
                                     <img
                                         :src="match.logo1"
                                         :alt="match.team1"
                                         class="w-full h-full object-contain rounded-full"
                                     />
                                 </div>
-                                <span class="font-medium">{{
-                                    match.team1
-                                }}</span>
+                                <span class="text-sm font-medium truncate">
+                                    {{ match.team1 }}
+                                </span>
                             </div>
+
+                            <!-- Счет -->
                             <div
-                                class="bg-primary-blue px-4 py-2 rounded-lg text-white font-bold text-lg"
+                                class="mx-2 px-3 py-1 bg-primary-blue rounded text-white font-bold text-sm whitespace-nowrap"
                             >
                                 {{ match.score }}
                             </div>
-                            <div class="flex items-center gap-3">
-                                <span class="font-medium">{{
-                                    match.team2
-                                }}</span>
-                                <div class="w-10 h-10 relative">
+
+                            <!-- Команда 2 -->
+                            <div
+                                class="flex items-center gap-2 flex-1 min-w-0 justify-end"
+                            >
+                                <span class="text-sm font-medium truncate">
+                                    {{ match.team2 }}
+                                </span>
+                                <div class="w-8 h-8 flex-shrink-0">
                                     <img
                                         :src="match.logo2"
                                         :alt="match.team2"
@@ -150,6 +165,15 @@
                                     />
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Кнопка "Смотреть" -->
+                        <div class="mt-2 flex justify-end">
+                            <button
+                                class="text-xs text-blue-400 hover:text-blue-300 flex items-center"
+                            >
+                                Смотреть все →
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -213,11 +237,11 @@
                     </router-link>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div
                         v-for="match in upcomingMatches"
                         :key="match.id"
-                        class="bg-gray-700 rounded-xl p-6 card-hover"
+                        class="bg-gray-700 rounded-xl p-4 md:p-6 card-hover"
                     >
                         <UpcomingMatch :match="match" />
                     </div>
@@ -778,10 +802,6 @@ import MapInfo from '@/components/MapInfo.vue'
 import { getTeamLogo } from '@/utils/PicturesAdmin.ts'
 
 const { teamsdata, getTeamById } = await useTeams()
-
-const myTeam = await getTeamById(1)
-console.log(myTeam)
-console.log(myTeam.name)
 
 const teamId = 2
 const logoUrl = getTeamLogo(teamId)
