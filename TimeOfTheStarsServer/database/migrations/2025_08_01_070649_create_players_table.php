@@ -17,12 +17,6 @@ return new class extends Migration
             $table->date('birth_date')->nullable();
             $table->string('position')->nullable(); // Амплуа
             $table->string('grip')->nullable();     // Хват
-            $table->foreignId('team_id')->nullable()->constrained('teams')->nullOnDelete();
-            $table->unsignedInteger('matches')->default(0);
-            $table->unsignedInteger('goals')->default(0);
-            $table->unsignedInteger('assists')->default(0);
-            $table->unsignedInteger('penalties')->default(0);
-            $table->unsignedInteger('number')->nullable();
             $table->timestamps();
         });
     }
