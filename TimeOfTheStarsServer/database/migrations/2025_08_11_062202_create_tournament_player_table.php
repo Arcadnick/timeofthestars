@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tournament_player', function (Blueprint $table) {
+        Schema::create('tournament_players', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tournament_id')->constrained()->onDelete('cascade');
             $table->foreignId('team_id')->constrained()->onDelete('cascade');
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('assists')->default(0);
             $table->unsignedInteger('penalties')->default(0);
             $table->unsignedInteger('number')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tournament_player');
+        Schema::dropIfExists('tournament_players');
     }
 };
