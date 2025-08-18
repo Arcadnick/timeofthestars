@@ -8,9 +8,14 @@ use App\Http\Controllers\Controller;
 
 class TeamController extends Controller
 {
+//    public function index()
+//    {
+//        return Team::with('players')->get();
+//    }
+
     public function index()
     {
-        return Team::with('players')->get();
+        return Team::with(['championshipPlayers', 'tournamentPlayers'])->get();
     }
 
     public function store(Request $request)
@@ -26,9 +31,14 @@ class TeamController extends Controller
         return Team::create($validated);
     }
 
+//    public function show(Team $team)
+//    {
+//        return $team->load('players');
+//    }
+
     public function show(Team $team)
     {
-        return $team->load('players');
+        return $team->load(['championshipPlayers', 'tournamentPlayers']);
     }
 
     public function update(Request $request, Team $team)

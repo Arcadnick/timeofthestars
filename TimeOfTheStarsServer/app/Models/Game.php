@@ -11,12 +11,12 @@ class Game extends Model
 
     public function tournaments(): BelongsToMany
     {
-        return $this->belongsToMany(Tournament::class);
+        return $this->belongsToMany(Tournament::class, 'tournament_games', 'game_id', 'tournament_id');
     }
 
     public function championships(): BelongsToMany
     {
-        return $this->belongsToMany(Championship::class);
+        return $this->belongsToMany(Championship::class, 'championship_games', 'game_id', 'championship_id');
     }
 
     public function teamA()
