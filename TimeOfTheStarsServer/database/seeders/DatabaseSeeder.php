@@ -16,16 +16,16 @@ class DatabaseSeeder extends Seeder
             TeamSeeder::class, //+
             PlayerSeeder::class, //+
 
-            GameMatchSeeder::class,
+            GameMatchSeeder::class,//+
 
-            ChampionshipSeeder::class, //+
-            ChampionshipGameSeeder::class,
-            ChampionshipTeamSeeder::class,
-            ChampionshipPlayerSeeder::class,
+            //ChampionshipSeeder::class, //+
+            //ChampionshipGameSeeder::class,
+            //ChampionshipTeamSeeder::class,
+            //ChampionshipPlayerSeeder::class,
 
             TournamentSeeder::class,//+
-            TournamentGameSeeder::class,
-            TournamentTeamSeeder::class,
+            TournamentGameSeeder::class,//+
+            TournamentTeamSeeder::class,//+
             TournamentPlayerSeeder::class,
         ]);
     }

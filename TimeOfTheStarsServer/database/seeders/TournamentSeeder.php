@@ -18,13 +18,13 @@ class TournamentSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        Tournament::create([
-            'name' => 'Кубок победы',
-            'start_date' => '2025-05-01',
-            'end_date' => '2025-05-04',
-            'location' => '"ГУОР"',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+//        Tournament::create([
+//            'name' => 'Кубок победы',
+//            'start_date' => '2025-05-01',
+//            'end_date' => '2025-05-04',
+//            'location' => '"ГУОР"',
+//            'created_at' => now(),
+//            'updated_at' => now(),
+//        ]);
     }
 }
