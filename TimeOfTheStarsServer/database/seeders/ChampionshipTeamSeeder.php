@@ -12,6 +12,9 @@ class ChampionshipTeamSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ChampionshipTeam::create([
+            'championship_id' => 1,
+            'team_id' => 1,
+        ]);
     }
 }

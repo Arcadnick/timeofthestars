@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Player extends Model
+class TournamentTeam extends Model
 {
-    protected $fillable = [
-        'full_name', 'birth_date', 'position', 'grip'];
+    protected $fillable = ['tournament_id', 'team_id'];
+
+    public function tournament(): BelongsTo
+    {
+        return $this->belongsTo(Tournament::class);
+    }
 
     public function team(): BelongsTo
     {
