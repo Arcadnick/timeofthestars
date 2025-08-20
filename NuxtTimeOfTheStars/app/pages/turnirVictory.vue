@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gray-900 text-white">
+    <div class="min-h-screen bg-gray-900 text-white overflow-x-hidden">
         <Header />
 
         <!-- Tournament Header -->
@@ -124,66 +124,87 @@
                     📅 Календарь игр
                 </h2>
 
-                <div class="space-y-8">
+                <div class="space-y-6 md:space-y-8">
+                    <!-- Блок 1-2 мая -->
                     <div>
                         <h3
-                            class="text-2xl font-semibold mb-6 text-accent-blue flex items-center gap-2"
+                            class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-accent-blue flex items-center gap-2"
                         >
-                            <span class="text-3xl">🗓️</span>
+                            <span class="text-2xl md:text-3xl">🗓️</span>
                             1-2 мая
                         </h3>
-                        <div class="space-y-4">
+                        <div class="space-y-3 md:space-y-4">
                             <div
                                 v-for="(match, index) in matches.slice(0, 4)"
                                 :key="index"
-                                class="bg-gray-700 rounded-xl p-6 card-hover"
+                                class="bg-gray-700 rounded-lg md:rounded-xl p-4 md:p-6 card-hover"
                             >
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-4">
-                                        <div class="text-sm text-gray-400 w-20">
-                                            <div class="font-medium">
-                                                {{ match.date }}
-                                            </div>
-                                            <div>{{ match.time }}</div>
+                                <div
+                                    class="flex flex-col md:flex-row md:items-center justify-between gap-3"
+                                >
+                                    <!-- Дата и время -->
+                                    <div
+                                        class="text-xs md:text-sm text-gray-400 w-full md:w-20"
+                                    >
+                                        <div class="font-medium">
+                                            {{ match.date }}
                                         </div>
-                                        <div class="flex items-center gap-6">
+                                        <div>{{ match.time }}</div>
+                                    </div>
+
+                                    <!-- Команды и счет -->
+                                    <div
+                                        class="flex-1 flex flex-col sm:flex-row items-center gap-3 md:gap-6 overflow-hidden"
+                                    >
+                                        <!-- Команда 1 -->
+                                        <div
+                                            class="flex items-center gap-2 md:gap-3 flex-1 min-w-0"
+                                        >
                                             <div
-                                                class="flex items-center gap-3"
+                                                class="w-6 h-6 md:w-8 md:h-8 relative flex-shrink-0"
                                             >
-                                                <div class="w-8 h-8 relative">
-                                                    <img
-                                                        :src="match.logo1"
-                                                        :alt="match.team1"
-                                                        class="object-contain rounded-full w-full h-full"
-                                                    />
-                                                </div>
-                                                <span class="font-medium">
-                                                    {{ match.team1 }}
-                                                </span>
+                                                <img
+                                                    :src="match.logo1"
+                                                    :alt="match.team1"
+                                                    class="object-contain rounded-full w-full h-full"
+                                                />
                                             </div>
-                                            <div
-                                                class="bg-primary-blue px-4 py-2 rounded-lg text-white font-bold"
+                                            <span
+                                                class="font-medium text-sm truncate"
+                                                >{{ match.team1 }}</span
                                             >
-                                                {{ match.score }}
-                                            </div>
-                                            <div
-                                                class="flex items-center gap-3"
+                                        </div>
+
+                                        <!-- Счет -->
+                                        <div
+                                            class="bg-primary-blue px-3 py-1 md:px-4 md:py-2 rounded-lg text-white font-bold text-sm md:text-base whitespace-nowrap mx-auto sm:mx-0"
+                                        >
+                                            {{ match.score }}
+                                        </div>
+
+                                        <!-- Команда 2 -->
+                                        <div
+                                            class="flex items-center gap-2 md:gap-3 flex-1 min-w-0 justify-end"
+                                        >
+                                            <span
+                                                class="font-medium text-sm truncate"
+                                                >{{ match.team2 }}</span
                                             >
-                                                <span class="font-medium">
-                                                    {{ match.team2 }}
-                                                </span>
-                                                <div class="w-8 h-8 relative">
-                                                    <img
-                                                        :src="match.logo2"
-                                                        :alt="match.team2"
-                                                        class="object-contain rounded-full w-full h-full"
-                                                    />
-                                                </div>
+                                            <div
+                                                class="w-6 h-6 md:w-8 md:h-8 relative flex-shrink-0"
+                                            >
+                                                <img
+                                                    :src="match.logo2"
+                                                    :alt="match.team2"
+                                                    class="object-contain rounded-full w-full h-full"
+                                                />
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Статус -->
                                     <div
-                                        class="bg-green-600/20 text-green-400 px-3 py-1 rounded-full text-sm"
+                                        class="bg-green-600/20 text-green-400 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm ml-auto md:ml-0"
                                     >
                                         Завершен
                                     </div>
@@ -192,65 +213,86 @@
                         </div>
                     </div>
 
+                    <!-- Блок 3-4 мая -->
                     <div>
                         <h3
-                            class="text-2xl font-semibold mb-6 text-accent-red flex items-center gap-2"
+                            class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-accent-red flex items-center gap-2"
                         >
-                            <span class="text-3xl">🗓️</span>
+                            <span class="text-2xl md:text-3xl">🗓️</span>
                             3-4 мая
                         </h3>
-                        <div class="space-y-4">
+                        <div class="space-y-3 md:space-y-4">
                             <div
                                 v-for="(match, index) in matches.slice(4)"
                                 :key="index"
-                                class="bg-gray-700 rounded-xl p-6 card-hover"
+                                class="bg-gray-700 rounded-lg md:rounded-xl p-4 md:p-6 card-hover"
                             >
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-4">
-                                        <div class="text-sm text-gray-400 w-20">
-                                            <div class="font-medium">
-                                                {{ match.date }}
-                                            </div>
-                                            <div>{{ match.time }}</div>
+                                <div
+                                    class="flex flex-col md:flex-row md:items-center justify-between gap-3"
+                                >
+                                    <!-- Дата и время -->
+                                    <div
+                                        class="text-xs md:text-sm text-gray-400 w-full md:w-20"
+                                    >
+                                        <div class="font-medium">
+                                            {{ match.date }}
                                         </div>
-                                        <div class="flex items-center gap-6">
+                                        <div>{{ match.time }}</div>
+                                    </div>
+
+                                    <!-- Команды и счет -->
+                                    <div
+                                        class="flex-1 flex flex-col sm:flex-row items-center gap-3 md:gap-6 overflow-hidden"
+                                    >
+                                        <!-- Команда 1 -->
+                                        <div
+                                            class="flex items-center gap-2 md:gap-3 flex-1 min-w-0"
+                                        >
                                             <div
-                                                class="flex items-center gap-3"
+                                                class="w-6 h-6 md:w-8 md:h-8 relative flex-shrink-0"
                                             >
-                                                <div class="w-8 h-8 relative">
-                                                    <img
-                                                        :src="match.logo1"
-                                                        :alt="match.team1"
-                                                        class="object-contain rounded-full w-full h-full"
-                                                    />
-                                                </div>
-                                                <span class="font-medium">
-                                                    {{ match.team1 }}
-                                                </span>
+                                                <img
+                                                    :src="match.logo1"
+                                                    :alt="match.team1"
+                                                    class="object-contain rounded-full w-full h-full"
+                                                />
                                             </div>
-                                            <div
-                                                class="bg-primary-red px-4 py-2 rounded-lg text-white font-bold"
+                                            <span
+                                                class="font-medium text-sm truncate"
+                                                >{{ match.team1 }}</span
                                             >
-                                                {{ match.score }}
-                                            </div>
-                                            <div
-                                                class="flex items-center gap-3"
+                                        </div>
+
+                                        <!-- Счет -->
+                                        <div
+                                            class="bg-primary-red px-3 py-1 md:px-4 md:py-2 rounded-lg text-white font-bold text-sm md:text-base whitespace-nowrap mx-auto sm:mx-0"
+                                        >
+                                            {{ match.score }}
+                                        </div>
+
+                                        <!-- Команда 2 -->
+                                        <div
+                                            class="flex items-center gap-2 md:gap-3 flex-1 min-w-0 justify-end"
+                                        >
+                                            <span
+                                                class="font-medium text-sm truncate"
+                                                >{{ match.team2 }}</span
                                             >
-                                                <span class="font-medium">
-                                                    {{ match.team2 }}
-                                                </span>
-                                                <div class="w-8 h-8 relative">
-                                                    <img
-                                                        :src="match.logo2"
-                                                        :alt="match.team2"
-                                                        class="object-contain rounded-full w-full h-full"
-                                                    />
-                                                </div>
+                                            <div
+                                                class="w-6 h-6 md:w-8 md:h-8 relative flex-shrink-0"
+                                            >
+                                                <img
+                                                    :src="match.logo2"
+                                                    :alt="match.team2"
+                                                    class="object-contain rounded-full w-full h-full"
+                                                />
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Статус -->
                                     <div
-                                        class="bg-green-600/20 text-green-400 px-3 py-1 rounded-full text-sm"
+                                        class="bg-green-600/20 text-green-400 px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm ml-auto md:ml-0"
                                     >
                                         Завершен
                                     </div>
@@ -386,48 +428,81 @@
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-primary-blue/20 to-primary-red/20 rounded-2xl"
                     ></div>
+
                     <div
-                        class="bg-gradient-to-br from-primary-blue to-primary-red p-12 rounded-2xl relative"
+                        class="bg-gradient-to-br from-primary-blue to-primary-red p-4 sm:p-8 md:p-12 rounded-xl md:rounded-2xl relative w-full max-w-4xl mx-auto"
                     >
                         <div
-                            class="bg-white/10 backdrop-blur-sm rounded-xl p-8"
+                            class="bg-white/10 backdrop-blur-sm rounded-lg md:rounded-xl p-4 sm:p-6 md:p-8"
                         >
-                            <div class="w-32 h-32 relative mx-auto mb-6">
+                            <!-- Логотип -->
+                            <div
+                                class="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 relative mx-auto mb-4 sm:mb-6"
+                            >
                                 <img
                                     src="/photo_53844715688281.png (1).webp"
                                     alt="ХК Зубр"
                                     class="object-contain rounded-full w-full h-full"
                                 />
                             </div>
-                            <h3 class="text-3xl font-bold mb-2 text-white">
-                                ХК "Зубр"
-                            </h3>
-                            <p class="text-white/80 mb-8 text-lg">
-                                г. Ярославль
-                            </p>
 
-                            <div class="grid grid-cols-2 gap-8">
-                                <div class="bg-white/10 rounded-lg p-4">
-                                    <div class="text-white/80 mb-2">
+                            <!-- Название и город -->
+                            <div class="text-center">
+                                <h3
+                                    class="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-white truncate"
+                                >
+                                    ХК "Зубр"
+                                </h3>
+                                <p
+                                    class="text-white/80 mb-6 sm:mb-8 text-base sm:text-lg"
+                                >
+                                    г. Ярославль
+                                </p>
+                            </div>
+
+                            <!-- Статистика -->
+                            <div
+                                class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8"
+                            >
+                                <!-- Процент побед -->
+                                <div class="bg-white/10 rounded-lg p-3 sm:p-4">
+                                    <div
+                                        class="text-white/80 mb-1 sm:mb-2 text-sm sm:text-base"
+                                    >
                                         4 победы из 6 игр
                                     </div>
-                                    <div class="text-2xl font-bold text-white">
+                                    <div
+                                        class="text-xl sm:text-2xl font-bold text-white"
+                                    >
                                         66%
                                     </div>
-                                    <div class="text-white/60">
+                                    <div
+                                        class="text-white/60 text-xs sm:text-sm"
+                                    >
                                         Процент побед
                                     </div>
                                 </div>
-                                <div class="bg-white/10 rounded-lg p-4">
-                                    <div class="text-4xl font-bold text-white">
+
+                                <!-- Очки -->
+                                <div class="bg-white/10 rounded-lg p-3 sm:p-4">
+                                    <div
+                                        class="text-2xl sm:text-3xl md:text-4xl font-bold text-white"
+                                    >
                                         7
                                     </div>
-                                    <div class="text-white/80">Очков</div>
+                                    <div
+                                        class="text-white/80 text-sm sm:text-base"
+                                    >
+                                        Очков
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="mt-8">
-                                <div class="text-white/80 text-lg">
+                            <!-- Дополнительная информация -->
+                            <div class="mt-6 sm:mt-8">
+                                <div
+                                    class="text-white/80 text-base sm:text-lg text-center sm:text-left"
+                                >
                                     Заслуженная победа в напряженной борьбе!
                                 </div>
                             </div>

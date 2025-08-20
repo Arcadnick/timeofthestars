@@ -27,7 +27,7 @@
                     <h1
                         class="text-5xl md:text-7xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-red-600 bg-clip-text text-transparent mb-6 tracking-tight"
                     >
-                        🏒 ХК "СПАРТАК" ⭐
+                        🏒 {{teamData.name}} ⭐
                     </h1>
                     <div
                         class="flex items-center justify-center space-x-4 text-lg md:text-xl text-gray-600 dark:text-gray-300"
@@ -81,10 +81,10 @@
                         <h2
                             class="text-4xl md:text-6xl font-black mb-3 tracking-wider"
                         >
-                            ХК "СПАРТАК"
+                            {{teamData.name}}
                         </h2>
                         <p class="text-xl md:text-2xl opacity-90 font-light">
-                            г. Москва
+                            г. {{teamData.city}}
                         </p>
                     </div>
 
@@ -482,7 +482,7 @@
                                                 <h5
                                                     class="font-bold text-lg group-hover:text-blue-600 transition-colors duration-200"
                                                 >
-                                                    {{ player.name }}
+                                                    {{ player.full_name }}
                                                 </h5>
                                                 <span
                                                     class="text-sm font-medium"
@@ -505,7 +505,7 @@
                                                 <span
                                                     class="bg-gradient-to-r from-blue-600 to-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center text-sm font-bold shadow-lg group-hover:shadow-xl transition-shadow duration-200"
                                                 >
-                                                    {{ player.number }}
+                                                    {{ player.pivot.number }}
                                                 </span>
                                             </div>
                                         </div>
@@ -513,7 +513,7 @@
                                         <p
                                             class="text-sm text-gray-600 dark:text-gray-400 mb-3 font-medium"
                                         >
-                                            {{ player.position }}
+                                            {{ player.pivot.position }}
                                         </p>
 
                                         <div
@@ -560,7 +560,7 @@
                                                     <span
                                                         class="font-semibold text-blue-600"
                                                     >
-                                                        {{ player.goals }}
+                                                        {{ player.pivot.goals }}
                                                     </span>
                                                     <span class="text-gray-500"
                                                         >голов</span
@@ -573,7 +573,7 @@
                                                     <span
                                                         class="font-semibold text-red-600"
                                                     >
-                                                        {{ player.assists }}
+                                                        {{ player.pivot.assists }}
                                                     </span>
                                                     <span class="text-gray-500"
                                                         >передач</span
@@ -653,7 +653,7 @@
                                             class="flex items-center space-x-3 mb-2"
                                         >
                                             <h4 class="font-bold text-lg">
-                                                ХК "Спартак" vs
+                                                {{teamData.name}} vs
                                                 {{ match.opponent }}
                                             </h4>
                                             <span
@@ -852,11 +852,11 @@
                         class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1"
                         :class="`bg-${social.color}-100 dark:bg-${social.color}-900/30 hover:bg-${social.color}-200 dark:hover:bg-${social.color}-800/50`"
                     >
-                        <span class="text-xl">{{ social.icon }}</span>
+                        <span class="text-xl">{{ social.icon }}</span>ы
                     </button>
                 </div>
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    © 2024 ХК "Спартак" • Все права защищены • Сделано с ❤️ для
+                    © 2024 {{teamData.name}} • Все права защищены • Сделано с ❤️ для
                     болельщиков
                 </p>
             </div>
@@ -864,188 +864,115 @@
     </div>
 </template>
 
-<script>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
-export default {
-    setup() {
-        const activeTab = ref('forwards')
-        const isVisible = ref(false)
-        const currentTime = ref(new Date())
+const route = useRoute();
+const teamId = route.params.id;
 
-        const players = {
-            forwards: [
-                {
-                    id: 1,
-                    name: 'Александров И.',
-                    number: 91,
-                    goals: 23,
-                    assists: 15,
-                    position: 'Центральный нападающий',
-                    rating: 9.2,
-                    trend: 'up',
-                },
-                {
-                    id: 2,
-                    name: 'Кузнецов А.',
-                    number: 17,
-                    goals: 18,
-                    assists: 12,
-                    position: 'Правый крайний',
-                    rating: 8.7,
-                    trend: 'up',
-                },
-                {
-                    id: 3,
-                    name: 'Морозов В.',
-                    number: 24,
-                    goals: 15,
-                    assists: 20,
-                    position: 'Левый крайний',
-                    rating: 8.9,
-                    trend: 'stable',
-                },
-                {
-                    id: 4,
-                    name: 'Волков С.',
-                    number: 13,
-                    goals: 12,
-                    assists: 8,
-                    position: 'Центральный нападающий',
-                    rating: 8.1,
-                    trend: 'down',
-                },
-                {
-                    id: 5,
-                    name: 'Лебедев М.',
-                    number: 77,
-                    goals: 10,
-                    assists: 14,
-                    position: 'Правый крайний',
-                    rating: 8.3,
-                    trend: 'up',
-                },
-                {
-                    id: 6,
-                    name: 'Соколов Д.',
-                    number: 19,
-                    goals: 8,
-                    assists: 11,
-                    position: 'Левый крайний',
-                    rating: 7.9,
-                    trend: 'stable',
-                },
-            ],
-            defenders: [
-                {
-                    id: 7,
-                    name: 'Петров В.',
-                    number: 4,
-                    goals: 8,
-                    assists: 22,
-                    position: 'Левый защитник',
-                    rating: 9.0,
-                    trend: 'up',
-                },
-                {
-                    id: 8,
-                    name: 'Смирнов А.',
-                    number: 27,
-                    goals: 5,
-                    assists: 18,
-                    position: 'Правый защитник',
-                    rating: 8.5,
-                    trend: 'stable',
-                },
-                {
-                    id: 9,
-                    name: 'Козлов И.',
-                    number: 55,
-                    goals: 3,
-                    assists: 15,
-                    position: 'Левый защитник',
-                    rating: 8.2,
-                    trend: 'up',
-                },
-                {
-                    id: 10,
-                    name: 'Новиков П.',
-                    number: 2,
-                    goals: 4,
-                    assists: 12,
-                    position: 'Правый защитник',
-                    rating: 7.8,
-                    trend: 'down',
-                },
-            ],
-            goalkeepers: [
-                {
-                    id: 11,
-                    name: 'Сидоров М.',
-                    number: 30,
-                    saves: 87,
-                    shutouts: 12,
-                    position: 'Основной вратарь',
-                    rating: 9.1,
-                    trend: 'up',
-                },
-                {
-                    id: 12,
-                    name: 'Федоров К.',
-                    number: 1,
-                    saves: 82,
-                    shutouts: 8,
-                    position: 'Запасной вратарь',
-                    rating: 8.4,
-                    trend: 'stable',
-                },
-                {
-                    id: 13,
-                    name: 'Орлов Н.',
-                    number: 35,
-                    saves: 79,
-                    shutouts: 5,
-                    position: 'Третий вратарь',
-                    rating: 8.0,
-                    trend: 'up',
-                },
-            ],
-        }
+const { data: teamData, error } = await useAsyncData(
+  `team-${teamId}`,
+  () => $fetch(`https://timeofthestars.ru/api/teams/${teamId}`)
+);
 
-        const getTrendIcon = trend => {
-            switch (trend) {
-                case 'up':
-                    return '📈'
-                case 'down':
-                    return '📉'
-                default:
-                    return '➡️'
-            }
-        }
-
-        const getTrendColor = trend => {
-            switch (trend) {
-                case 'up':
-                    return 'text-green-500'
-                case 'down':
-                    return 'text-red-500'
-                default:
-                    return 'text-gray-500'
-            }
-        }
-
-        onMounted(() => {
-            isVisible.value = true
-        })
-
-        return {
-            activeTab,
-            isVisible,
-            currentTime,
-            players,
-            getTrendIcon,
-            getTrendColor,
-        }
-    },
+if (error.value || !teamData.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: `Команда не найдена`,
+    fatal: true
+  });
 }
+
+// --- Интегрированная логика ---
+
+const activeTab = ref('forwards');
+const isVisible = ref(false);
+const currentTime = ref(new Date());
+let timer = null;
+
+onMounted(() => {
+  isVisible.value = true;
+  timer = setInterval(() => {
+    currentTime.value = new Date();
+  }, 1000);
+});
+
+onUnmounted(() => {
+    if(timer) {
+        clearInterval(timer);
+    }
+});
+
+const formattedTime = computed(() => {
+    return currentTime.value.toLocaleTimeString('ru-RU');
+});
+
+const getTrendIcon = (trend) => {
+    // Поскольку в API нет данных о тренде, возвращаем default
+    return '➡️';
+};
+
+const getTrendColor = (trend) => {
+    // Поскольку в API нет данных о тренде, возвращаем default
+    return 'text-gray-500';
+};
+
+const teamStats = computed(() => [
+    { label: 'Победы', value: teamData.value.wins, color: 'green', trend: '' },
+    { label: 'Поражения', value: teamData.value.losses, color: 'red', trend: '' },
+    { label: 'Игроки', value: teamData.value.players_count, color: 'accent-blue', trend: '' },
+    { label: 'Рейтинг', value: 'N/A', color: 'yellow', trend: 'default' } // Данных нет в API
+]);
+
+// Объединяем игроков из двух массивов
+const allPlayers = computed(() => {
+    const players = [
+        ...(teamData.value.championship_players || []),
+        ...(teamData.value.tournament_players || [])
+    ];
+    // Убираем дубликаты по ID, если они есть
+    const uniquePlayers = new Map();
+    players.forEach(p => uniquePlayers.set(p.id, p));
+    return Array.from(uniquePlayers.values());
+});
+
+const totalPlayers = computed(() => allPlayers.value.length);
+
+// Группируем игроков по позиции (предполагаем наличие поля 'position')
+const playersByPosition = computed(() => {
+    const groups = {
+        forwards: [],
+        defenders: [],
+        goalkeepers: [],
+        other: []
+    };
+
+    allPlayers.value.forEach(player => {
+        const pos = (player.position || 'other').toLowerCase();
+        if (pos.includes('нападающий') || pos.includes('форвард')) {
+            groups.forwards.push(player);
+        } else if (pos.includes('защитник')) {
+            groups.defenders.push(player);
+        } else if (pos.includes('вратарь')) {
+            groups.goalkeepers.push(player);
+        } else {
+            groups.other.push(player);
+        }  
+    });
+    return groups;
+});
+
+console.log(teamData.value)
+
+const tabs = computed(() => [
+    { key: 'forwards', label: 'Нападающие', count: playersByPosition.value.forwards.length, color: 'red' },
+    { key: 'defenders', label: 'Защитники', count: playersByPosition.value.defenders.length, color: 'blue' },
+    { key: 'goalkeepers', label: 'Вратари', count: playersByPosition.value.goalkeepers.length, color: 'green' },
+    { key: 'other', label: 'Другие', count: playersByPosition.value.other.length, color: 'gray' }
+].filter(tab => tab.count > 0));
+
+const currentPlayers = computed(() => {
+    return playersByPosition.value[activeTab.value] || [];
+});
+
 </script>

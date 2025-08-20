@@ -1,7 +1,7 @@
 <template>
     <div class="w-20 h-20 relative mx-auto mb-4">
         <img
-            :src="team.logo"
+            :src="getTeamLogo(team.id)"
             :alt="team.name"
             class="w-full h-full object-contain rounded-full"
         />
@@ -32,16 +32,18 @@
         </div>
     </div>
 
-    <RouterLink to="/teaminfopage">
+    <NuxtLink :to="`/teams/${team.id}`">
         <div
             class="w-full block mt-4 bg-primary-blue text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-secondary-blue transition-colors"
         >
             Подробнее о команде
         </div>
-    </RouterLink>
+    </NuxtLink>
 </template>
 
 <script setup>
+import { getTeamLogo } from '@/utils/PicturesAdmin.ts'
+
 defineProps({
     team: {
         type: Object,
