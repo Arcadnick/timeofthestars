@@ -116,7 +116,7 @@
                     </div>
 
                     <NuxtLink
-                        to="/teams"
+                        to="/teamsPage"
                         class="text-gray-300 hover:text-white transition-colors"
                         >Команды</NuxtLink
                     >
@@ -133,7 +133,7 @@
                 </nav>
 
                 <!-- Кнопка CTA -->
-                <div class="hidden md:block">
+                <!-- <div class="hidden md:block">
                     <NuxtLink to="/regpage">
                         <button
                             class="btn-primary-professional border-none px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-opacity"
@@ -141,7 +141,7 @@
                             🚀 Записаться
                         </button>
                     </NuxtLink>
-                </div>
+                </div> -->
                 <!-- Мобильное меню -->
                 <button
                     class="md:hidden text-gray-300 hover:text-white"

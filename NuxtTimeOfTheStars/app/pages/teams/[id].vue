@@ -14,6 +14,30 @@
         </div>
 
         <div class="max-w-7xl mx-auto relative z-10">
+             <div class="flex justify-between items-center mb-8">
+                 <NuxtLink
+                    to="/"
+                    class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-all duration-300 hover:scale-105 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl px-6 py-3 shadow-lg border border-blue-200 dark:border-blue-800"
+                    :class="{
+                        'opacity-100 translate-x-0': isVisible,
+                        'opacity-0 -translate-x-10': !isVisible,
+                    }"
+                >
+                    <span class="mr-3 text-xl">←</span>
+                    <span class="font-semibold">На главную</span>
+                 </NuxtLink>
+                 <NuxtLink
+                    to="/teams"
+                    class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-all duration-300 hover:scale-105 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl px-6 py-3 shadow-lg border border-blue-200 dark:border-blue-800"
+                    :class="{
+                        'opacity-100 translate-x-0': isVisible,
+                        'opacity-0 -translate-x-10': !isVisible,
+                    }"
+                >
+                    <span class="font-semibold">К списку команд</span>
+                    <span class="ml-3 text-xl">→</span>
+                 </NuxtLink>
+            </div>
             <!-- Header с анимацией -->
             <div
                 class="text-center mb-12 transition-all duration-1000"
@@ -408,7 +432,7 @@
                             <div
                                 class="ml-auto text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full"
                             >
-                                Всего: {{ totalPlayers }} игроков
+                                Всего: {{ teamData.players_count }} игроков
                             </div>
                         </h3>
 
@@ -453,10 +477,10 @@
                         <div
                             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                         >
-                            <router-link
+                            <NuxtLink
                                 v-for="(player, index) in currentPlayers"
                                 :key="player.id"
-                                :to="`/player/${player.id}`"
+                                :to="`/players/${player.id}?from=${$route.fullPath}`"
                             >
                                 <div
                                     class="group bg-white dark:bg-gray-800 rounded-2xl p-5 hover:shadow-2xl transition-all duration-300 cursor-pointer hover:scale-105 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 relative overflow-hidden"
@@ -604,7 +628,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </router-link>
+                            </NuxtLink>
                         </div>
                     </div>
 
@@ -865,6 +889,7 @@
 </template>
 
 <script setup>
+import { NuxtLink } from '#components';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const route = useRoute();
@@ -872,7 +897,7 @@ const teamId = route.params.id;
 
 const { data: teamData, error } = await useAsyncData(
   `team-${teamId}`,
-  () => $fetch(`https://timeofthestars.ru/api/teams/${teamId}`)
+  () => $fetch(`https://api.timeofthestars.ru/api/teams/${teamId}`)
 );
 
 if (error.value || !teamData.value) {

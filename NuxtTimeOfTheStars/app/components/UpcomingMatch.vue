@@ -3,7 +3,7 @@
         <div
             class="bg-primary-blue px-3 py-1 rounded-full text-white text-sm font-medium"
         >
-            {{ match.tournament }}
+            {{ match.tournaments[0].name }}
         </div>
         <div class="text-gray-400 text-sm">
             {{ match.date }} • {{ match.time }}
@@ -14,19 +14,19 @@
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 relative">
                 <img
-                    :src="match.logo1"
+                    :src="getTeamLogo(match.team_a_id)"
                     :alt="match.team1"
                     class="w-full h-full object-contain rounded-full"
                 />
             </div>
-            <span class="font-medium">{{ match.team1 }}</span>
+            <span class="font-medium">{{ match.team_a.name }}</span>
         </div>
         <div class="text-2xl font-bold text-gray-400">VS</div>
         <div class="flex items-center gap-3">
-            <span class="font-medium">{{ match.team2 }}</span>
+            <span class="font-medium">{{ match.team_b.name }}</span>
             <div class="w-12 h-12 relative">
                 <img
-                    :src="match.logo2"
+                    :src="getTeamLogo(match.team_b_id)"
                     :alt="match.team2"
                     class="w-full h-full object-contain rounded-full"
                 />
@@ -45,4 +45,5 @@ defineProps({
         },
     },
 })
+
 </script>

@@ -131,7 +131,7 @@
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl font-bold mb-8 text-center">
                     👥 Участники турнира
-                </h2>
+                </h2>   
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div
@@ -162,62 +162,7 @@
 
         <!-- Table Tab -->
         <section v-if="activeTab === 'table'" class="py-16 px-4">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold mb-8 text-center">
-                    📊 Турнирная таблица
-                </h2>
-                <div class="bg-gray-800 rounded-xl overflow-hidden">
-                    <table class="w-full">
-                        <thead class="bg-gray-700">
-                            <tr>
-                                <th class="px-6 py-4 text-left">Место</th>
-                                <th class="px-6 py-4 text-left">Команда</th>
-                                <th class="px-6 py-4 text-center">И</th>
-                                <th class="px-6 py-4 text-center">В</th>
-                                <th class="px-6 py-4 text-center">П</th>
-                                <th class="px-6 py-4 text-center">О</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(team, index) in sortedTeams"
-                                :key="index"
-                                class="border-b border-gray-700 hover:bg-gray-700/50"
-                            >
-                                <td class="px-6 py-4 font-bold">
-                                    {{ index + 1 }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-3">
-                                        <img
-                                            :src="team.logo"
-                                            :alt="team.name"
-                                            class="w-8 h-8 rounded-full"
-                                        />
-                                        <span>{{ team.name }}</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center">
-                                    {{ team.wins + team.losses }}
-                                </td>
-                                <td
-                                    class="px-6 py-4 text-center text-green-400"
-                                >
-                                    {{ team.wins }}
-                                </td>
-                                <td class="px-6 py-4 text-center text-red-400">
-                                    {{ team.losses }}
-                                </td>
-                                <td
-                                    class="px-6 py-4 text-center font-bold text-accent-blue"
-                                >
-                                    {{ team.points }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <Table/>
         </section>
 
         <!-- Results Tab -->
@@ -232,45 +177,7 @@
                         :key="index"
                         class="bg-gray-800 rounded-xl p-6 card-hover"
                     >
-                        <div class="flex items-center justify-between">
-                            <div class="text-sm text-gray-400 w-32">
-                                <div>{{ match.date }}</div>
-                                <div>{{ match.time }}</div>
-                            </div>
-                            <div
-                                class="flex items-center gap-6 flex-1 justify-center"
-                            >
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 relative">
-                                        <img
-                                            :src="match.logo1"
-                                            :alt="match.team1"
-                                            class="w-full h-full object-contain rounded-full"
-                                        />
-                                    </div>
-                                    <span class="font-medium">{{
-                                        match.team1
-                                    }}</span>
-                                </div>
-                                <div
-                                    class="bg-primary-blue px-4 py-2 rounded-lg text-white font-bold text-lg"
-                                >
-                                    {{ match.score }}
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <span class="font-medium">{{
-                                        match.team2
-                                    }}</span>
-                                    <div class="w-10 h-10 relative">
-                                        <img
-                                            :src="match.logo2"
-                                            :alt="match.team2"
-                                            class="w-full h-full object-contain rounded-full"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Matches :match="match" />
                     </div>
                 </div>
             </div>
@@ -380,80 +287,24 @@ import { ref, computed } from 'vue'
 // Активная вкладка
 const activeTab = ref('participants')
 
-// Данные команд
-const teams = ref([
-    {
-        name: 'ХК "Вымпел-v"',
-        city: 'г. Ярославль',
-        logo: '/photo_53844715688281.png (2).webp',
-        wins: 3,
-        losses: 1,
-        points: 9,
-    },
-    {
-        name: 'ХК "Зубр"',
-        city: 'г. Ярославль',
-        logo: '/photo_53844715688281.png (1).webp',
-        wins: 2,
-        losses: 2,
-        points: 6,
-    },
-    {
-        name: 'ХК "Переславль"',
-        city: 'г. Переславль',
-        logo: '/photo_53844715688281.png.webp',
-        wins: 4,
-        losses: 0,
-        points: 12,
-    },
-    {
-        name: 'ХК "Ярославич"',
-        city: 'г. Ярославль',
-        logo: '/photo_53844715688281.png (3).webp',
-        wins: 1,
-        losses: 3,
-        points: 3,
-    },
-    {
-        name: 'ХК "Торпедо"',
-        city: 'г. Ярославль',
-        logo: '/photo_53844715688281.png (4).webp',
-        wins: 2,
-        losses: 2,
-        points: 6,
-    },
-])
+const { data: turnirdata } = useFetch('https://api.timeofthestars.ru/api/tournaments');
 
-// Данные матчей
-const matches = ref([
-    {
-        date: '15.01.2024',
-        time: '18:00',
-        team1: 'ХК "Переславль"',
-        team2: 'ХК "Зубр"',
-        score: '4-2',
-        logo1: '/photo_53844715688281.png.webp',
-        logo2: '/photo_53844715688281.png (1).webp',
-    },
-    {
-        date: '14.01.2024',
-        time: '16:30',
-        team1: 'ХК "Вымпел-v"',
-        team2: 'ХК "Ярославич"',
-        score: '3-1',
-        logo1: '/photo_53844715688281.png (2).webp',
-        logo2: '/photo_53844715688281.png (3).webp',
-    },
-    {
-        date: '13.01.2024',
-        time: '19:00',
-        team1: 'ХК "Торпедо"',
-        team2: 'ХК "Переславль"',
-        score: '1-5',
-        logo1: '/photo_53844715688281.png (4).webp',
-        logo2: '/photo_53844715688281.png.webp',
-    },
-])
+console.log(turnirdata.value); 
+const teams = computed(() => {
+  if (!turnirdata.value || turnirdata.value.length === 0) {
+    return [];
+  }
+  return turnirdata.value[0].teams || [];
+});
+const matches = computed(() => {
+  if (!turnirdata.value || turnirdata.value.length === 0) {
+    return [];
+  }
+  return turnirdata.value[0].games || [];
+});
+
+console.log(matches.value); 
+
 
 // Сортированные команды по очкам для таблицы
 const sortedTeams = computed(() => {

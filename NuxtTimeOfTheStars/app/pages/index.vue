@@ -86,99 +86,7 @@
             </div>
         </section>
 
-        <!-- Live Matches -->
-        <section class="py-8 px-4 border-b border-gray-700">
-            <div class="max-w-6xl mx-auto">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold flex items-center gap-2">
-                        <div
-                            class="w-3 h-3 bg-red-500 rounded-full animate-pulse"
-                        ></div>
-                        Прямые трансляции
-                    </h2>
-                    <router-link
-                        to="/live"
-                        class="text-accent-blue hover:text-accent-red transition-colors"
-                    >
-                        Смотреть все →
-                    </router-link>
-                </div>
-
-                <div class="grid grid-cols-1 gap-3">
-                    <div
-                        v-for="(match, index) in liveMatches"
-                        :key="index"
-                        class="bg-gray-800 rounded-lg p-3 border-l-4 border-red-500"
-                    >
-                        <!-- Заголовок с LIVE и временем -->
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="flex items-center gap-2">
-                                <div
-                                    class="w-2 h-2 bg-red-500 rounded-full animate-pulse"
-                                ></div>
-                                <span class="text-red-400 text-sm font-medium"
-                                    >LIVE</span
-                                >
-                            </div>
-                            <span
-                                class="text-gray-400 text-xs bg-gray-700 px-2 py-1 rounded"
-                            >
-                                {{ match.time }}
-                            </span>
-                        </div>
-
-                        <!-- Команды и счет -->
-                        <div class="flex items-center justify-between">
-                            <!-- Команда 1 -->
-                            <div class="flex items-center gap-2 flex-1 min-w-0">
-                                <div class="w-8 h-8 flex-shrink-0">
-                                    <img
-                                        :src="match.logo1"
-                                        :alt="match.team1"
-                                        class="w-full h-full object-contain rounded-full"
-                                    />
-                                </div>
-                                <span class="text-sm font-medium truncate">
-                                    {{ match.team1 }}
-                                </span>
-                            </div>
-
-                            <!-- Счет -->
-                            <div
-                                class="mx-2 px-3 py-1 bg-primary-blue rounded text-white font-bold text-sm whitespace-nowrap"
-                            >
-                                {{ match.score }}
-                            </div>
-
-                            <!-- Команда 2 -->
-                            <div
-                                class="flex items-center gap-2 flex-1 min-w-0 justify-end"
-                            >
-                                <span class="text-sm font-medium truncate">
-                                    {{ match.team2 }}
-                                </span>
-                                <div class="w-8 h-8 flex-shrink-0">
-                                    <img
-                                        :src="match.logo2"
-                                        :alt="match.team2"
-                                        class="w-full h-full object-contain rounded-full"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Кнопка "Смотреть" -->
-                        <div class="mt-2 flex justify-end">
-                            <button
-                                class="text-xs text-blue-400 hover:text-blue-300 flex items-center"
-                            >
-                                Смотреть все →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+   
 
         <!-- Stats Section -->
         <section class="py-16 px-4">
@@ -758,12 +666,12 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link
+                                <NuxtLink
                                     to="/gallery"
                                     class="hover:text-white transition-colors"
                                 >
                                     Галерея
-                                </router-link>
+                                </NuxtLink>
                             </li>
                             <li>
                                 <router-link
@@ -801,7 +709,7 @@ import { ref } from 'vue'
 import MapInfo from '@/components/MapInfo.vue'
 import { getTeamLogo } from '@/utils/PicturesAdmin.ts'
 
-const {data: teamsdata, error} = useFetch('https://timeofthestars.ru/api/teams')
+const {data: teamsdata, error} = useFetch('https://api.timeofthestars.ru/api/teams')
 
 // Данные для прямых трансляций
 const liveMatches = ref([
@@ -823,49 +731,8 @@ const liveMatches = ref([
     },
 ])
 
-// Данные для предстоящих матчей
-const upcomingMatches = ref([
-    {
-        id: 1,
-        tournament: 'Звезда Отечества',
-        team1: 'Локомотив',
-        team2: 'Динамо',
-        logo1: '/logo1.png',
-        logo2: '/logo5.png',
-        date: '25 января',
-        time: '19:00',
-    },
-    {
-        id: 2,
-        tournament: 'Кубок Победы',
-        team1: 'Зубр',
-        team2: 'Переславль',
-        logo1: '/logo2.png',
-        logo2: '/logo3.png',
-        date: '27 января',
-        time: '18:30',
-    },
-    {
-        id: 3,
-        tournament: 'Звезда Отечества',
-        team1: 'Ярославль',
-        team2: 'Спартак',
-        logo1: '/logo4.png',
-        logo2: '/logo6.png',
-        date: '30 января',
-        time: '20:00',
-    },
-    {
-        id: 4,
-        tournament: 'Товарищеский',
-        team1: 'Торпедо',
-        team2: 'Локомотив',
-        logo1: '/logo7.png',
-        logo2: '/logo1.png',
-        date: '2 февраля',
-        time: '19:30',
-    },
-])
+const {data: upcomingMatches} = useFetch('https://api.timeofthestars.ru/api/games')
+console.log(upcomingMatches.value)
 
 // Данные для лучших игроков
 const topPlayers = ref([

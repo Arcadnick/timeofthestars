@@ -114,15 +114,15 @@
             </div>
         </section>
 
-        <!-- Live Match Alert -->
-        <section
+     
+        <!-- <section
             class="py-6 sm:py-8 px-4 bg-red-900/20 border-y border-red-500/30"
         >
             <div class="max-w-6xl mx-auto">
                 <div
                     class="bg-red-900/30 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-red-500/30"
                 >
-                    <!-- Верхняя строка (статус и дата) -->
+                   
                     <div
                         class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-0"
                     >
@@ -143,11 +143,11 @@
                         </div>
                     </div>
 
-                    <!-- Блок с командами -->
+                    
                     <div
                         class="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6"
                     >
-                        <!-- Команда 1 -->
+                        
                         <div
                             class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto"
                         >
@@ -166,14 +166,14 @@
                             >
                         </div>
 
-                        <!-- VS (центрируется на мобильных) -->
+                        
                         <div
                             class="text-xl sm:text-2xl font-bold text-white px-2 sm:px-0"
                         >
                             VS
                         </div>
 
-                        <!-- Команда 2 -->
+                        
                         <div
                             class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-end"
                         >
@@ -194,30 +194,22 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Navigation Tabs -->
         <section class="py-8 px-4 bg-gray-800 border-b border-gray-700">
             <div class="max-w-6xl mx-auto">
                 <div class="flex flex-wrap justify-center gap-4">
-                    <button
-                        class="bg-primary-blue text-white px-6 py-3 rounded-xl font-semibold shadow-lg"
-                    >
+                    <button @click="scrollTo('participants')" class="bg-primary-blue text-white px-6 py-3 rounded-xl font-semibold shadow-lg">
                         👥 Участники
                     </button>
-                    <button
-                        class="bg-gray-700 text-gray-300 px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors"
-                    >
+                    <button @click="scrollTo('playoff')" class="bg-gray-700 text-gray-300 px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors">
                         🏆 Плей-офф
                     </button>
-                    <button
-                        class="bg-gray-700 text-gray-300 px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors"
-                    >
+                    <button @click="scrollTo('standings')" class="bg-gray-700 text-gray-300 px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors">
                         📊 Таблица
                     </button>
-                    <button
-                        class="bg-gray-700 text-gray-300 px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors"
-                    >
+                    <button @click="scrollTo('matches')" class="bg-gray-700 text-gray-300 px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors">
                         🏒 Матчи
                     </button>
                 </div>
@@ -225,7 +217,7 @@
         </section>
 
         <!-- Participants -->
-        <section class="py-16 px-4">
+        <section id="participants" class="py-16 px-4">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl font-bold mb-8 text-center">
                     👥 Участники чемпионата
@@ -237,55 +229,14 @@
                         :key="index"
                         class="bg-gray-800 rounded-xl p-6 card-hover border border-gray-700"
                     >
-                        <div class="text-center">
-                            <div class="w-16 h-16 relative mx-auto mb-4">
-                                <img
-                                    :src="team.logo"
-                                    :alt="team.name"
-                                    class="object-contain rounded-full w-full h-full"
-                                />
-                            </div>
-                            <h3 class="text-lg font-semibold mb-1">
-                                {{ team.name }}
-                            </h3>
-                            <p class="text-gray-400 text-sm mb-4">
-                                {{ team.city }}
-                            </p>
+                        <TurnirParticipants :team="team" />
 
-                            <div class="grid grid-cols-3 gap-2 text-center">
-                                <div>
-                                    <div
-                                        class="text-lg font-bold text-green-400"
-                                    >
-                                        {{ team.wins }}
-                                    </div>
-                                    <div class="text-xs text-gray-400">П</div>
-                                </div>
-                                <div>
-                                    <div class="text-lg font-bold text-red-400">
-                                        {{ team.losses }}
-                                    </div>
-                                    <div class="text-xs text-gray-400">Пор</div>
-                                </div>
-                                <div>
-                                    <div
-                                        class="text-lg font-bold text-accent-blue"
-                                    >
-                                        {{ team.points }}
-                                    </div>
-                                    <div class="text-xs text-gray-400">
-                                        Очки
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Playoff Bracket -->
-        <section class="py-8 sm:py-12 md:py-16 px-3 sm:px-4 bg-gray-800">
+        <section id="playoff" class="py-8 sm:py-12 md:py-16 px-3 sm:px-4 bg-gray-800">
             <div class="max-w-6xl mx-auto">
                 <h2
                     class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center"
@@ -294,7 +245,7 @@
                 </h2>
 
                 <div class="space-y-8 sm:space-y-12">
-                    <!-- Final -->
+                    
                     <div class="text-center">
                         <h3
                             class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gradient"
@@ -310,11 +261,11 @@
                                 18.04.2025 • 20:00
                             </div>
 
-                            <!-- Вертикальное расположение на мобильных -->
+                            
                             <div
                                 class="flex flex-col items-center gap-3 sm:flex-row sm:justify-between sm:gap-4"
                             >
-                                <!-- Команда 1 -->
+
                                 <div
                                     class="flex flex-col items-center sm:items-start sm:flex-row sm:gap-3"
                                 >
@@ -341,14 +292,14 @@
                                     </div>
                                 </div>
 
-                                <!-- Счет (центрирован на мобильных) -->
+
                                 <div
                                     class="bg-yellow-600 px-4 py-2 rounded-lg text-white font-bold text-lg sm:text-xl my-2 sm:my-0"
                                 >
                                     VS
                                 </div>
 
-                                <!-- Команда 2 -->
+                                
                                 <div
                                     class="flex flex-col items-center sm:items-end sm:flex-row-reverse sm:gap-3"
                                 >
@@ -378,7 +329,7 @@
                         </div>
                     </div>
 
-                    <!-- Third Place -->
+                    
                     <div class="text-center">
                         <h3
                             class="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-accent-red"
@@ -397,7 +348,7 @@
                             <div
                                 class="flex flex-col items-center gap-3 sm:flex-row sm:justify-between"
                             >
-                                <!-- Команда 1 -->
+                                
                                 <div
                                     class="flex flex-col items-center sm:flex-row sm:gap-3"
                                 >
@@ -415,14 +366,14 @@
                                     </div>
                                 </div>
 
-                                <!-- Счет -->
+
                                 <div
                                     class="bg-green-600 px-4 py-2 rounded text-white font-bold text-lg my-2 sm:my-0"
                                 >
                                     6-4
                                 </div>
 
-                                <!-- Команда 2 -->
+
                                 <div
                                     class="flex flex-col items-center sm:flex-row-reverse sm:gap-3"
                                 >
@@ -443,7 +394,7 @@
                         </div>
                     </div>
 
-                    <!-- Semifinals -->
+
                     <div class="text-center">
                         <h3
                             class="text-lg sm:text-xl font-semibold mb-4 sm:mb-6"
@@ -453,7 +404,7 @@
                         <div
                             class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto"
                         >
-                            <!-- Матч 1 -->
+                            
                             <div
                                 class="bg-gray-700 rounded-lg sm:rounded-xl p-4 sm:p-6"
                             >
@@ -466,7 +417,7 @@
                                 <div
                                     class="flex flex-col items-center gap-3 sm:flex-row sm:justify-between"
                                 >
-                                    <!-- Команда 1 -->
+
                                     <div
                                         class="flex flex-col items-center sm:flex-row sm:gap-2"
                                     >
@@ -486,14 +437,13 @@
                                         </div>
                                     </div>
 
-                                    <!-- Счет -->
                                     <div
                                         class="bg-green-600 px-3 py-1 rounded text-white font-bold text-base my-2 sm:my-0"
                                     >
                                         3-2(б)
                                     </div>
 
-                                    <!-- Команда 2 -->
+
                                     <div
                                         class="flex flex-col items-center sm:flex-row-reverse sm:gap-2"
                                     >
@@ -515,7 +465,7 @@
                                 </div>
                             </div>
 
-                            <!-- Матч 2 -->
+                            
                             <div
                                 class="bg-gray-700 rounded-lg sm:rounded-xl p-4 sm:p-6"
                             >
@@ -528,7 +478,7 @@
                                 <div
                                     class="flex flex-col items-center gap-3 sm:flex-row sm:justify-between"
                                 >
-                                    <!-- Команда 1 -->
+                                    
                                     <div
                                         class="flex flex-col items-center sm:flex-row sm:gap-2"
                                     >
@@ -548,14 +498,14 @@
                                         </div>
                                     </div>
 
-                                    <!-- Счет -->
+
                                     <div
                                         class="bg-green-600 px-3 py-1 rounded text-white font-bold text-base my-2 sm:my-0"
                                     >
                                         4-3
                                     </div>
 
-                                    <!-- Команда 2 -->
+                                    
                                     <div
                                         class="flex flex-col items-center sm:flex-row-reverse sm:gap-2"
                                     >
@@ -582,137 +532,12 @@
             </div>
         </section>
         <!-- Standings -->
-        <section class="py-16 px-4">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold mb-8 text-center">
-                    📊 Рейтинг команд
-                </h2>
-
-                <div
-                    class="bg-gray-800 rounded-xl overflow-hidden border border-gray-700"
-                >
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead class="bg-gray-700">
-                                <tr>
-                                    <th
-                                        class="px-6 py-4 text-left font-semibold"
-                                    >
-                                        Место
-                                    </th>
-                                    <th
-                                        class="px-6 py-4 text-left font-semibold"
-                                    >
-                                        Команда
-                                    </th>
-                                    <th
-                                        class="px-6 py-4 text-center font-semibold"
-                                    >
-                                        И
-                                    </th>
-                                    <th
-                                        class="px-6 py-4 text-center font-semibold"
-                                    >
-                                        П
-                                    </th>
-                                    <th
-                                        class="px-6 py-4 text-center font-semibold"
-                                    >
-                                        Н
-                                    </th>
-                                    <th
-                                        class="px-6 py-4 text-center font-semibold"
-                                    >
-                                        П
-                                    </th>
-                                    <th
-                                        class="px-6 py-4 text-center font-semibold"
-                                    >
-                                        Голы
-                                    </th>
-                                    <th
-                                        class="px-6 py-4 text-center font-semibold"
-                                    >
-                                        О
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="(team, index) in standings"
-                                    :key="index"
-                                    :class="`border-t border-gray-700 hover:bg-gray-700/50 transition-colors ${getStatusColor(
-                                        team.status
-                                    )} bg-opacity-10`"
-                                >
-                                    <td class="px-6 py-4 font-semibold text-lg">
-                                        {{ team.place }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 relative">
-                                                <img
-                                                    :src="team.logo"
-                                                    :alt="team.team"
-                                                    class="object-contain rounded-full w-full h-full"
-                                                />
-                                            </div>
-                                            <span class="font-medium">{{
-                                                team.team
-                                            }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        {{ team.games }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-center text-green-400"
-                                    >
-                                        {{ team.wins }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-center text-gray-400"
-                                    >
-                                        {{ team.draws }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-center text-red-400"
-                                    >
-                                        {{ team.losses }}
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        {{ team.goals }}
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-center font-bold text-accent-blue text-lg"
-                                    >
-                                        {{ team.points }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap justify-center gap-6 mt-8">
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 bg-green-600 rounded"></div>
-                        <span class="text-sm">Плей-офф</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 bg-yellow-600 rounded"></div>
-                        <span class="text-sm">Переходные матчи</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 bg-red-600 rounded"></div>
-                        <span class="text-sm">Вылет</span>
-                    </div>
-                </div>
-            </div>
+        <section id="standings">
+            <Table/>
         </section>
 
         <!-- Recent Matches -->
-        <section class="py-16 px-4 bg-gray-800">
+        <section id="matches" class="py-16 px-4 bg-gray-800">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl font-bold mb-8 text-center">
                     🏒 Последние матчи
@@ -722,96 +547,12 @@
                     class="space-y-3 sm:space-y-4 max-w-4xl mx-auto px-2 sm:px-0"
                 >
                     <div
-                        v-for="(match, index) in recentMatches"
+                        v-for="(match, index) in matches"
                         :key="index"
                         class="bg-gray-700 rounded-lg sm:rounded-xl p-4 sm:p-6 card-hover"
                     >
-                        <!-- Верхняя строка для мобильных (дата и статус) -->
-                        <div
-                            class="sm:hidden flex justify-between items-center mb-3"
-                        >
-                            <div class="text-xs text-gray-400">
-                                {{ match.date }}
-                            </div>
-                            <div
-                                class="bg-green-600/20 text-green-400 px-2 py-1 rounded-full text-xs"
-                            >
-                                Завершен
-                            </div>
-                        </div>
+                        <Matches :match="match" />
 
-                        <!-- Основное содержимое -->
-                        <div
-                            class="flex flex-col sm:flex-row items-center justify-between gap-3"
-                        >
-                            <!-- Дата (только для десктопа) -->
-                            <div
-                                class="hidden sm:block text-sm text-gray-400 w-20"
-                            >
-                                {{ match.date }}
-                            </div>
-
-                            <!-- Команды и счет -->
-                            <div class="flex-1 w-full">
-                                <div
-                                    class="flex flex-col xs:flex-row items-center justify-between gap-2"
-                                >
-                                    <!-- Команда 1 -->
-                                    <div
-                                        class="flex items-center gap-2 flex-1 min-w-0"
-                                    >
-                                        <div
-                                            class="w-6 h-6 sm:w-8 sm:h-8 relative flex-shrink-0"
-                                        >
-                                            <img
-                                                :src="match.logo1"
-                                                :alt="match.team1"
-                                                class="object-contain rounded-full w-full h-full"
-                                            />
-                                        </div>
-                                        <span
-                                            class="font-medium text-sm sm:text-base truncate"
-                                        >
-                                            {{ match.team1 }}
-                                        </span>
-                                    </div>
-
-                                    <!-- Счет -->
-                                    <div
-                                        class="bg-primary-blue px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-white font-bold text-sm sm:text-base my-2 xs:my-0 mx-auto xs:mx-0"
-                                    >
-                                        {{ match.score }}
-                                    </div>
-
-                                    <!-- Команда 2 -->
-                                    <div
-                                        class="flex items-center gap-2 flex-1 min-w-0 justify-end"
-                                    >
-                                        <span
-                                            class="font-medium text-sm sm:text-base truncate"
-                                        >
-                                            {{ match.team2 }}
-                                        </span>
-                                        <div
-                                            class="w-6 h-6 sm:w-8 sm:h-8 relative flex-shrink-0"
-                                        >
-                                            <img
-                                                :src="match.logo2"
-                                                :alt="match.team2"
-                                                class="object-contain rounded-full w-full h-full"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Статус (только для десктопа) -->
-                            <div
-                                class="hidden sm:block bg-green-600/20 text-green-400 px-3 py-1 rounded-full text-sm"
-                            >
-                                Завершен
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -860,245 +601,33 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            teams: [
-                {
-                    name: 'ХК "Вымпел-v"',
-                    city: 'г. Ярославль',
-                    logo: '/photo_53844715688281.png (2).webp',
-                    wins: 9,
-                    losses: 8,
-                    points: 18,
-                },
-                {
-                    name: 'ХК "Зубр"',
-                    city: 'г. Ярославль',
-                    logo: '/photo_53844715688281.png (1).webp',
-                    wins: 10,
-                    losses: 3,
-                    points: 22,
-                },
-                {
-                    name: 'ХК "Переславль"',
-                    city: 'г. Переславль',
-                    logo: '/photo_53844715688281.png.webp',
-                    wins: 15,
-                    losses: 5,
-                    points: 32,
-                },
-                {
-                    name: 'ХК "Ярославич"',
-                    city: 'г. Ярославль',
-                    logo: '/photo_53844715688281.png (3).webp',
-                    wins: 7,
-                    losses: 6,
-                    points: 17,
-                },
-                {
-                    name: 'ХК "Торпедо"',
-                    city: 'г. Ярославль',
-                    logo: '/photo_53844715688281.png (4).webp',
-                    wins: 15,
-                    losses: 1,
-                    points: 33,
-                },
-                {
-                    name: 'ХК "Вымпел-к"',
-                    city: 'г. Ярославль',
-                    logo: '/FGFGF (1).png',
-                    wins: 2,
-                    losses: 14,
-                    points: 5,
-                },
-                {
-                    name: 'ХК "Искра"',
-                    city: 'г. Кострома',
-                    logo: '/photo.png.webp',
-                    wins: 1,
-                    losses: 14,
-                    points: 2,
-                },
-                {
-                    name: 'ХК "Локомотив СЖД"',
-                    city: 'г. Ярославль',
-                    logo: '/photo.png',
-                    wins: 8,
-                    losses: 13,
-                    points: 19,
-                },
-            ],
-            standings: [
-                {
-                    place: '✓1',
-                    team: 'ХК "Торпедо"',
-                    logo: '/photo_53844715688281.png (4).webp',
-                    games: 22,
-                    wins: 15,
-                    draws: 5,
-                    losses: 1,
-                    goals: '118-67',
-                    points: 33,
-                    status: 'playoff',
-                },
-                {
-                    place: '✓2',
-                    team: 'ХК "Переславль"',
-                    logo: '/photo_53844715688281.png.webp',
-                    games: 22,
-                    wins: 15,
-                    draws: 1,
-                    losses: 5,
-                    goals: '166-81',
-                    points: 32,
-                    status: 'playoff',
-                },
-                {
-                    place: '✓3',
-                    team: 'ХК "Зубр"',
-                    logo: '/photo_53844715688281.png (1).webp',
-                    games: 20,
-                    wins: 10,
-                    draws: 7,
-                    losses: 3,
-                    goals: '99-66',
-                    points: 22,
-                    status: 'playoff',
-                },
-                {
-                    place: '✓4',
-                    team: 'ХК "Вымпел-v"',
-                    logo: '/photo_53844715688281.png (2).webp',
-                    games: 22,
-                    wins: 9,
-                    draws: 1,
-                    losses: 8,
-                    goals: '109-87',
-                    points: 18,
-                    status: 'playoff',
-                },
-                {
-                    place: '5',
-                    team: 'ХК "Локомотив СЖД"',
-                    logo: '/photo.png',
-                    games: 22,
-                    wins: 8,
-                    draws: 1,
-                    losses: 13,
-                    goals: '85-115',
-                    points: 19,
-                    status: 'transition',
-                },
-                {
-                    place: '6',
-                    team: 'ХК "Ярославич"',
-                    logo: '/photo_53844715688281.png (3).webp',
-                    games: 16,
-                    wins: 7,
-                    draws: 3,
-                    losses: 6,
-                    goals: '65-74',
-                    points: 17,
-                    status: 'transition',
-                },
-                {
-                    place: '7',
-                    team: 'ХК "Вымпел-к"',
-                    logo: '/FGFGF (1).png',
-                    games: 16,
-                    wins: 2,
-                    draws: 1,
-                    losses: 14,
-                    goals: '45-111',
-                    points: 5,
-                    status: 'relegation',
-                },
-                {
-                    place: '8',
-                    team: 'ХК "Искра"',
-                    logo: '/photo.png.webp',
-                    games: 16,
-                    wins: 1,
-                    draws: 0,
-                    losses: 14,
-                    goals: '55-127',
-                    points: 2,
-                    status: 'relegation',
-                },
-            ],
-            recentMatches: [
-                {
-                    date: '20.12.2024',
-                    team1: 'ХК "Искра"',
-                    team2: 'ХК "Ярославич"',
-                    score: '0-10',
-                    logo1: '/photo.png.webp',
-                    logo2: '/photo_53844715688281.png (4).webp',
-                },
-                {
-                    date: '18.12.2024',
-                    team1: 'ХК "Зубр"',
-                    team2: 'ХК "Локомотив"',
-                    score: '6-0',
-                    logo1: '/photo_53844715688281.png (2).webp',
-                    logo2: '/photo.png',
-                },
-                {
-                    date: '17.12.2024',
-                    team1: 'ХК "Торпедо"',
-                    team2: 'ХК "Вымпел-v"',
-                    score: '7-6',
-                    logo1: '/photo_53844715688281.png.webp',
-                    logo2: '/photo_53844715688281.png (1).webp',
-                },
-                {
-                    date: '15.12.2024',
-                    team1: 'ХК "Переславль"',
-                    team2: 'ХК "Локомотив"',
-                    score: '9-4',
-                    logo1: '/photo_53844715688281.png (3).webp',
-                    logo2: '/photo.png',
-                },
-                {
-                    date: '13.12.2024',
-                    team1: 'ХК "Искра"',
-                    team2: 'ХК "Торпедо"',
-                    score: '4-12',
-                    logo1: '/photo.png.webp',
-                    logo2: '/photo_53844715688281.png.webp',
-                },
-            ],
-        }
-    },
-    methods: {
-        getStatusColor(status) {
-            switch (status) {
-                case 'playoff':
-                    return 'bg-green-600'
-                case 'transition':
-                    return 'bg-yellow-600'
-                case 'relegation':
-                    return 'bg-red-600'
-                default:
-                    return 'bg-gray-600'
-            }
-        },
-        getStatusText(status) {
-            switch (status) {
-                case 'playoff':
-                    return 'Плей-офф'
-                case 'transition':
-                    return 'Переходные матчи'
-                case 'relegation':
-                    return 'Вылет'
-                default:
-                    return ''
-            }
-        },
-    },
-}
+<script setup>
+import { ref, computed } from 'vue'
+
+const { data: turnirdata } = useFetch('https://api.timeofthestars.ru/api/tournaments');
+
+console.log(turnirdata.value); 
+const teams = computed(() => {
+  if (!turnirdata.value || turnirdata.value.length === 0) {
+    return [];
+  }
+  return turnirdata.value[0].teams || [];
+});
+const matches = computed(() => {
+  if (!turnirdata.value || turnirdata.value.length === 0) {
+    return [];
+  }
+  return turnirdata.value[0].games || [];
+});
+
+const scrollTo = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+console.log(matches.value); 
 </script>
 
 <style scoped>
