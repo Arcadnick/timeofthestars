@@ -318,7 +318,7 @@
                                                     23
                                                 </span>
                                                 <span class="text-gray-600">
-                                                    ⚽ гола
+                                                    🏒 гола
                                                 </span>
                                             </div>
                                             <div
@@ -362,7 +362,7 @@
                                                 8
                                             </span>
                                             <span class="text-gray-600">
-                                                ⚽ голов
+                                                🏒 голов
                                             </span>
                                         </div>
                                         <div class="bg-white/50 rounded-lg p-2">
@@ -580,7 +580,7 @@
                                                 <span
                                                     class="flex items-center space-x-1"
                                                 >
-                                                    <span>⚽</span>
+                                                    <span>🏒</span>
                                                     <span
                                                         class="font-semibold text-blue-600"
                                                     >

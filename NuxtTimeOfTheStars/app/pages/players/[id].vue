@@ -305,7 +305,7 @@
                                                 <div
                                                     class="text-xs text-gray-500"
                                                 >
-                                                    ⚽ Голы
+                                                    🏒 Голы
                                                 </div>
                                             </div>
                                             <div>
@@ -611,7 +611,7 @@ const statTabs = computed(() => [
 ])
 
 const currentSeasonStats = computed(() => [
-    { label: '⚽ Голы', value: player.goals, color: 'blue', trend: '+5' },
+    { label: '🏒 Голы', value: player.goals, color: 'blue', trend: '+5' },
     {
         label: '🎯 Передачи',
         value: player.assists,

@@ -627,7 +627,7 @@ const scrollTo = (id) => {
   }
 };
 
-console.log(matches.value); 
+console.log(turnirdata.value); 
 </script>
 
 <style scoped>

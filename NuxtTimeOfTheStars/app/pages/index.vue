@@ -37,18 +37,19 @@
                         хоккейной лиге
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <router-link to="/register">
+                        <!-- <router-link to="/register">
                             <button
                                 class="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
                             >
                                 🚀 Записаться в команду
                             </button>
-                        </router-link>
-                        <button
-                            class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-gray-600 hover:text-primary-blue transition-all transform hover:scale-105"
+                        </router-link> -->
+                        <NuxtLink
+                            to="/schedule"
+                            class="btn-primary-professional text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg"
                         >
                             📅 Смотреть расписание
-                        </button>
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
@@ -164,7 +165,7 @@
                     🌟 Лучшие игроки
                 </h2>
 
-                <div class="grid md:grid-cols-3 gap-6">
+                <!-- <div class="grid md:grid-cols-3 gap-6">
                     <div
                         v-for="player in topPlayers"
                         :key="player.id"
@@ -172,7 +173,8 @@
                     >
                         <PlayerCard :player="player" />
                     </div>
-                </div>
+                </div> -->
+                <p class="text-center text-gray-400 mt-8">здесь будет информация о лучших игроках</p>
             </div>
         </section>
 
@@ -336,7 +338,14 @@
                         class="bg-gray-700 rounded-xl overflow-hidden card-hover group"
                     >
                         <div
-                            class="h-48 bg-gradient-to-br from-primary-red to-primary-blue flex items-center justify-center group-hover:scale-105 transition-transform"
+                            class="h-48 flex items-center justify-center group-hover:scale-105 transition-transform"
+                            style="
+                                background: linear-gradient(
+                                    to bottom right,
+                                    var(--primary-blue),
+                                    var(--primary-red)
+                                );
+                            "
                         >
                             <span class="text-6xl">⚡</span>
                         </div>
@@ -380,7 +389,14 @@
                         class="bg-gray-700 rounded-xl overflow-hidden card-hover group"
                     >
                         <div
-                            class="h-48 bg-gradient-to-br from-primary-blue to-primary-red flex items-center justify-center group-hover:scale-105 transition-transform"
+                            class="h-48 flex items-center justify-center group-hover:scale-105 transition-transform"
+                            style="
+                                background: linear-gradient(
+                                    to bottom right,
+                                    var(--primary-blue),
+                                    var(--primary-red)
+                                );
+                            "
                         >
                             <span class="text-6xl">🎯</span>
                         </div>
@@ -549,13 +565,7 @@
                     </router-link>
                 </div>
 
-                <div class="text-center mt-12">
-                    <button
-                        class="btn-primary-professional text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg"
-                    >
-                        🏆 Показать все турниры
-                    </button>
-                </div>
+               
             </div>
         </section>
         <MapInfo />
@@ -576,13 +586,13 @@
                         с нами для участия в турнирах. 🏒
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <router-link to="/register">
+                        <!-- <router-link to="/register">
                             <button
                                 class="btn-primary-professional text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-lg"
                             >
                                 🏒 Подать заявку на участие
                             </button>
-                        </router-link>
+                        </router-link> -->
                         <button
                             class="border-2 border-gray-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-gray-700 transition-all transform hover:scale-105"
                         >
@@ -620,28 +630,28 @@
                         <h3 class="text-lg font-semibold mb-4">Турниры</h3>
                         <ul class="space-y-2 text-gray-400">
                             <li>
-                                <router-link
-                                    to="/turnirodin"
+                                <NuxtLink
+                                    to="/turnirOne"
                                     class="hover:text-white transition-colors"
                                 >
                                     Товарищеский турнир
-                                </router-link>
+                                </NuxtLink>
                             </li>
                             <li>
-                                <router-link
-                                    to="/victory"
+                                <NuxtLink
+                                    to="/turnirVictory"
                                     class="hover:text-white transition-colors"
                                 >
                                     Кубок Победы
-                                </router-link>
+                                </NuxtLink>
                             </li>
                             <li>
-                                <router-link
-                                    to="/zvezda_otechestva"
+                                <NuxtLink
+                                    to="/zvezdaOtechestva"
                                     class="hover:text-white transition-colors"
                                 >
                                     Звезда Отечества
-                                </router-link>
+                                </NuxtLink>
                             </li>
                         </ul>
                     </div>
@@ -650,20 +660,20 @@
                         <h3 class="text-lg font-semibold mb-4">Информация</h3>
                         <ul class="space-y-2 text-gray-400">
                             <li>
-                                <router-link
-                                    to="/teams"
+                                <NuxtLink
+                                    to="/teamsPage"
                                     class="hover:text-white transition-colors"
                                 >
                                     Команды
-                                </router-link>
+                                </NuxtLink>
                             </li>
                             <li>
-                                <router-link
+                                <NuxtLink
                                     to="/schedule"
                                     class="hover:text-white transition-colors"
                                 >
                                     Расписание
-                                </router-link>
+                                </NuxtLink>
                             </li>
                             <li>
                                 <NuxtLink
@@ -673,14 +683,14 @@
                                     Галерея
                                 </NuxtLink>
                             </li>
-                            <li>
-                                <router-link
-                                    to="/register"
+                            <!-- <li>
+                                <NuxtLink
+                                    to="/regPage"
                                     class="hover:text-white transition-colors"
                                 >
                                     Регистрация
-                                </router-link>
-                            </li>
+                                </NuxtLink>
+                            </li> -->
                         </ul>
                     </div>
 
@@ -736,27 +746,27 @@ console.log(upcomingMatches.value)
 
 // Данные для лучших игроков
 const topPlayers = ref([
-    {
-        // name: player.full_name,
-        // team: player.team_id.full_name,
-        // logo: '/logo1.png',
-        // goals: player.goals,
-        // assists: player.assists,
-    },
-    {
-        name: 'Дмитрий Сидоров',
-        team: 'ХК "Зубр"',
-        logo: '/logo2.png',
-        goals: 10,
-        assists: 11,
-    },
-    {
-        name: 'Михаил Иванов',
-        team: 'ХК "Переславль"',
-        logo: '/logo3.png',
-        goals: 9,
-        assists: 7,
-    },
+    // {
+    //     // name: player.full_name,
+    //     // team: player.team_id.full_name,
+    //     // logo: '/logo1.png',
+    //     // goals: player.goals,
+    //     // assists: player.assists,
+    // },
+    // {
+    //     name: 'Дмитрий Сидоров',
+    //     team: 'ХК "Зубр"',
+    //     logo: '/logo2.png',
+    //     goals: 10,
+    //     assists: 11,
+    // },
+    // {
+    //     name: 'Михаил Иванов',
+    //     team: 'ХК "Переславль"',
+    //     logo: '/logo3.png',
+    //     goals: 9,
+    //     assists: 7,
+    // },
 ])
 
 // Данные для команд

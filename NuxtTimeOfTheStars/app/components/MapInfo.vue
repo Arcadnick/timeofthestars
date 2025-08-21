@@ -41,12 +41,12 @@
             <!-- List View -->
             <div
                 v-if="activeTab === 'list'"
-                class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                class="flex flex-wrap justify-center gap-6"
             >
                 <div
                     v-for="stadium in stadiums"
                     :key="stadium.id"
-                    class="bg-gray-700 rounded-xl p-6 card-hover"
+                    class="bg-gray-700 rounded-xl p-6 card-hover w-full max-w-md"
                 >
                     <div class="flex items-center justify-between mb-4">
                         <div class="text-3xl">{{ stadium.emoji }}</div>
@@ -117,13 +117,13 @@
                     <!-- Map Controls -->
                     <div class="flex flex-wrap justify-center gap-4 mb-6">
                         <button
-                            @click="openExternalMap('yandex')"
+                        
                             class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
                         >
                             🗺️ Яндекс.Карты
                         </button>
                         <button
-                            @click="openExternalMap('google')"
+                           
                             class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                         >
                             📍 Google Maps
@@ -131,7 +131,7 @@
                     </div>
 
                     <!-- Stadium Quick Access -->
-                    <div class="grid md:grid-cols-3 gap-4">
+                    <div class="grid md:grid-cols-2 gap-4">
                         <button
                             v-for="stadium in stadiums"
                             :key="stadium.id"
@@ -293,17 +293,30 @@ export default defineComponent({
     setup() {
         const stadiums: Stadium[] = [
             {
-                id: 'crystal',
-                name: 'Ледовый дворец "Кристалл"',
-                address: 'ул. Спортивная, 15, Ярославль',
-                phone: '+7 (4852) 123-45-67',
-                hours: '06:00 - 23:00',
+                id: 'torpedo',
+                name: 'Ледовый дворец «Торпедо»',
+                address: 'Ярославль, улица Чкалова, 20А',
+                phone: '+7 (4852) 30-37-58',
+                hours: '07:00 - 23:00',
                 parking: true,
-                rating: 4.8,
+                rating: 4.7,
                 emoji: '🏒',
-                coordinates: { lat: 57.6261, lng: 39.8845 },
+                coordinates: { lat: 57.639482, lng: 39.848224 },
                 description:
-                    'Современный ледовый дворец с профессиональным покрытием и трибунами на 2000 мест.',
+                    'Современная ледовая арена, база хоккейного клуба «Локомотив».',
+            },
+            {
+                id: 'olympic',
+                name: 'ГУОР по хоккею',
+                address: 'Ярославль, улица Дядьковская, 7',
+                phone: '+7 (4852) 47-65-55',
+                hours: '08:00 - 22:00',
+                parking: true,
+                rating: 4.9,
+                emoji: '🥅',
+                coordinates: { lat: 57.583416, lng: 39.900425 },
+                description:
+                    'Государственное училище олимпийского резерва с качественным льдом для тренировок.',
             },
         ]
 

@@ -3,17 +3,19 @@
         class="bg-gray-900/95 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50"
     >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex items-center h-16">
                 <!-- Лого -->
-                <NuxtLink to="/" class="flex items-center space-x-2">
-                    <div class="text-2xl">🏒</div>
-                    <div class="text-xl font-bold text-gradient">
-                        ВРЕМЯ ЗВЁЗД
-                    </div>
-                </NuxtLink>
+                <div class="flex-1 mr-20">
+                    <NuxtLink to="/" class="flex items-center space-x-2">
+                        <div class="text-2xl">🏒</div>
+                        <div class="text-xl font-bold text-gradient">
+                            ВРЕМЯ ЗВЁЗД
+                        </div>
+                    </NuxtLink>
+                </div>
 
                 <!-- Навигация десктоп -->
-                <nav class="hidden md:flex items-center space-x-8">
+                <nav class="hidden md:flex items-center justify-center space-x-8">
                     <NuxtLink
                         to="/"
                         class="text-gray-300 hover:text-white transition-colors"
@@ -142,25 +144,27 @@
                         </button>
                     </NuxtLink>
                 </div> -->
-                <!-- Мобильное меню -->
-                <button
-                    class="md:hidden text-gray-300 hover:text-white"
-                    @click="toggleMobileMenu"
-                >
-                    <svg
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                <div class="flex-1 flex justify-end">
+                    <!-- Мобильное меню -->
+                    <button
+                        class="md:hidden text-gray-300 hover:text-white"
+                        @click="toggleMobileMenu"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"
-                        />
-                    </svg>
-                </button>
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <!-- Мобильная навигация -->
